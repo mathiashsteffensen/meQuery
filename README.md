@@ -4,4 +4,4 @@
 
 API implemented | Link to jQuery documentation
 --- | --- |
-`Base meQuery function - meQuery()` | *[https://api.jquery.com/jQuery/]*
+`Base meQuery function - meQuery()` | *https://api.jquery.com/jQuery/*
