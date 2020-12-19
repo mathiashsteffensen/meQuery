@@ -30,11 +30,13 @@ const addCollectionExtras = (collection) =>
         {
             return collection[0].style[args[0]]
         }
+        return collection
     }
 
     collection.on = (event, callback) =>
     {
         collection.forEach(element => element.addEventListener(event, callback))
+        return collection
     }
 
     collection.each = (callback) =>
@@ -44,11 +46,63 @@ const addCollectionExtras = (collection) =>
         {
             if (callback.call(collection[i], i, collection[i]) === false) break
         }
+        return collection
     }
 
-    collection.addClass = (...args) =>
+    collection.html = (arg) =>
     {
-        collection.forEach((element => args.flat().forEach(className => element.classList.add(className))))
+        if (typeof arg === 'string') collection.forEach(element => element.innerHTML = arg)
+        if (typeof arg === 'undefined') return collection[0].innerHTML
+        if (typeof arg === 'function')
+        {
+            const callback = arg
+            let i = 0
+            for (element of collection)
+            {
+                const oldHTML = element.innerHTML
+                element.innerHTML = ''
+                element.innerHTML = callback.call(element, i, oldHTML)
+                i++
+            }
+        }
+        return collection
+    }
+
+    collection.addClass = (arg) =>
+    {
+        let classNames
+        if (typeof arg === 'string') classNames = arg
+        else if (arg.length) classNames = arg.join(' ')
+        collection.forEach(element => element.classList.value = classNames + element.classList.value)
+        return collection
+    }
+
+    collection.removeClass = function (arg)
+    {
+        let classNames
+        if (typeof arg === 'function')
+        {
+            const callback = arg
+            collection.forEach((element, i) => 
+            {
+                this.removeClass(callback.call(element, i, element.classList.value))
+            })
+        } else 
+        {
+            if (typeof arg === 'string') classNames = arg.split(' ')
+            else if (arg.length) classNames = arg
+            collection.forEach(element => classNames.forEach((className => element.classList.remove(className))))
+        }
+        
+        
+    }
+    collection.removeClass = collection.removeClass.bind(collection)
+
+    collection.hasClass = (className) =>
+    {
+        let hasClass = false
+        collection.forEach(element => Array.from(element.classList).includes(className) ? hasClass = true : null)
+        return hasClass
     }
 
     return collection

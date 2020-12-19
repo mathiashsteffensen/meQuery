@@ -34,4 +34,20 @@ $(() =>
     })
 
     console.assert($('body').css('background-color') === 'rgb(157, 157, 157)')
+
+    console.assert($('li').html(function(i)
+    {
+        if (i % 2 === 0) return 'pink-bg'
+        else return 'not pink-bg'
+    }).html() === 'pink-bg')
+
+    console.assert($('#make-this-bigger').html('<span style="background-color: red;">Why?</span>').html() === '<span style="background-color: red;">Why?</span>')
+
+    $('ul').removeClass('green-bg')
+
+    $('li').removeClass(function()
+    {
+        if ($(this).hasClass('text-lg')) return ['text-lg']
+        else return 'w'
+    })
 })
