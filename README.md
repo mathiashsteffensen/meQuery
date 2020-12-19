@@ -9,6 +9,6 @@ API implemented | Link to jQuery documentation
 *meQuery.on() - Only takes 2 arguments, one event and a callback function* | *https://api.jquery.com/on/#on-events-selector-data-handler*
 *meQuery.each()* | *https://api.jquery.com/each/*
 *meQuery.html()* | *https://api.jquery.com/html/*
-*meQuery.addClass() - Does not accept a callback function* | *https://api.jquery.com/addClass/#addClass-className*
+*meQuery.addClass()* | *https://api.jquery.com/addClass/#addClass-className*
 *meQuery.removeClass()* | *https://api.jquery.com/removeClass/*
 *meQuery.hasClass()* | *https://api.jquery.com/hasClass/*
