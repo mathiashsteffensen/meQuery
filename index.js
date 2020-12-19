@@ -27,10 +27,10 @@ $(() =>
 
     $('h2').css('color', $('body').css('background-color'))
 
-    $('li').each((i, element) =>
+    $('li').each(function(i, e)
     {
-        if (i % 2 === 0) {$(element).css('color', 'white'); $(element).addClass(['pink-bg', 'white-txt'])}
-        else $(element).css('color', 'red')
+        if (i % 2 === 0) {$(this).css('color', 'white'); $(this).addClass(['pink-bg', 'white-txt'])}
+        else $(this).css('color', 'red')
     })
 
     console.assert($('body').css('background-color') === 'rgb(157, 157, 157)')
