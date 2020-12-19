@@ -71,11 +71,23 @@ const addCollectionExtras = (collection) =>
     collection.addClass = (arg) =>
     {
         let classNames
-        if (typeof arg === 'string') classNames = arg
-        else if (arg.length) classNames = arg.join(' ')
-        collection.forEach(element => element.classList.value = classNames + element.classList.value)
+        if (typeof arg === 'function')
+        {
+            const callback = arg
+            collection.forEach((element, i) =>
+            {
+                this.addClass(callback.call(element, i, element.classList.value))
+            })
+        } else
+        {
+            if (typeof arg === 'string') classNames = arg
+            else if (arg.length) classNames = arg.join(' ')
+            collection.forEach(element => element.classList.value = classNames + element.classList.value)
+        }
+        
         return collection
     }
+    collection.addClass = collection.addClass.bind(collection)
 
     collection.removeClass = function (arg)
     {
