@@ -39,7 +39,11 @@ const addCollectionExtras = (collection) =>
 
     collection.each = (callback) =>
     {
-        collection.forEach((element, i) => callback(i, element))
+        let i = 0
+        for (; i < collection.length; i++)
+        {
+            if (callback.call(collection[i], i, collection[i]) === false) break
+        }
     }
 
     collection.addClass = (...args) =>
